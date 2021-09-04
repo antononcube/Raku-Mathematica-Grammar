@@ -8,9 +8,9 @@ role Mathematica::Grammar::InputForm
 
 	token input-form-program {
 		||	<expr>
-			(	||	<NEWLINE>+
+			[	||	<NEWLINE>+
 					<expr>?
-			)*
+			]*
 		||	<expressionList>
 	}
 	token expr {
@@ -40,16 +40,16 @@ role Mathematica::Grammar::InputForm
 		||	<expr>
 			<DOUBLECOLON>
 			<StringLiteral>
-			(	||	<DOUBLECOLON>
+			[	||	<DOUBLECOLON>
 					<StringLiteral>
-			)?
+			]?
 		||	<slotExpression>
 		||	<outExpression>
 		||	<symbol>?
-			(	||	<TRIPPLEBLANK>
+			[	||	<TRIPPLEBLANK>
 				||	<DOUBLEBLANK>
 				||	<BLANK>
-			)
+			]
 			<expr>?
 		||	<symbol>?
 			<BLANKDOT>
@@ -68,12 +68,12 @@ role Mathematica::Grammar::InputForm
 		||	<BoxConstructor>
 			<expr>
 		||	<expr>
-			(	||	<DOUBLEPLUS>
+			[	||	<DOUBLEPLUS>
 				||	<DOUBLEMINUS>
-			)
-		||	(	||	<DOUBLEPLUS>
+			]
+		||	[	||	<DOUBLEPLUS>
 				||	<DOUBLEMINUS>
-			)
+			]
 			<expr>
 		||	<expr>
 			<ATASTERISK>
@@ -90,22 +90,22 @@ role Mathematica::Grammar::InputForm
 			<TILDE>
 			<expr>
 		||	<expr>
-			(	||	<MAP>
+			[	||	<MAP>
 				||	<MAPALL>
 				||	<DOUBLEAT>
 				||	<TRIPPLEAT>
-			)
+			]
 			<expr>
 		||	<expr>
-			(	||	<BANG>
+			[	||	<BANG>
 				||	<DOUBLEBANG>
-			)
+			]
 		||	<expr>
-			(	||	<CONJUGATE>
+			[	||	<CONJUGATE>
 				||	<TRANSPOSE>
 				||	<CONJUGATETRANSPOSE>
 				||	<HERMITIANCONJUGATE>
-			)
+			]
 		||	<expr>
 			<SINGLEQUOTE>+
 		||	<expr>
@@ -137,16 +137,16 @@ role Mathematica::Grammar::InputForm
 		||	<expr>
 			<DOT>
 			<expr>
-		||	(	||	<MINUS>
+		||	[	||	<MINUS>
 				||	<PLUS>
 				||	<PLUSMINUS>
 				||	<MINUSPLUS>
-			)
+			]
 			<expr>
 		||	<expr>
-			(	||	<SLASH>
+			[	||	<SLASH>
 				||	<DIVIDE>
-			)
+			]
 			<expr>
 		||	<expr>
 			<RAWBACKSLASH>
@@ -191,11 +191,11 @@ role Mathematica::Grammar::InputForm
 			<CIRCLEMINUS>
 			<expr>
 		||	<expr>
-			(	||	<BINARYPLUS>
+			[	||	<BINARYPLUS>
 				||	<BINARYMINUS>
 				||	<BINARYPLUSMINUS>
 				||	<BINARYMINUSPLUS>
-			)
+			]
 			<expr>
 		||	<expr>
 			<INTERSECTION>
@@ -208,9 +208,9 @@ role Mathematica::Grammar::InputForm
 			<expr>?
 		||	<SPANSEMICOLONS>
 			<expr>?
-			(	||	<DOUBLESEMICOLON>
+			[	||	<DOUBLESEMICOLON>
 					<expr>?
-			)*
+			]*
 		||	<expr>
 			(	||	<EqualSymbol>
 				||	<NotEqualSymbol>
@@ -221,72 +221,72 @@ role Mathematica::Grammar::InputForm
 			)
 			<expr>
 		||	<expr>
-			(	||	<VERTICALBAR>
+			[	||	<VERTICALBAR>
 				||	<NOTVERTICALBAR>
 				||	<DOUBLEVERTICALBAR>
 				||	<NOTDOUBLEVERTICALBAR>
-			)
+			]
 			<expr>
 		||	<expr>
-			(	||	<TRIPPLEEQUAL>
+			[	||	<TRIPPLEEQUAL>
 				||	<EQUALBANGEQUAL>
-			)
+			]
 			<expr>
 		||	<expr>
-			(	||	<ELEMENT>
+			[	||	<ELEMENT>
 				||	<NOTELEMENT>
 				||	<SUBSET>
 				||	<SUPERSET>
-			)
+			]
 			<expr>
-		||	(	||	<BANG>
+		||	[	||	<BANG>
 				||	<NOT>
-			)
+			]
 			<expr>
 		||	<expr>
-			(	||	<DOUBLEAMP>
+			[	||	<DOUBLEAMP>
 				||	<AND>
 				||	<NAND>
-			)
+			]
 			<expr>
 		||	<expr>
-			(	||	<XOR>
+			[	||	<XOR>
 				||	<XNOR>
-			)
+			]
 			<expr>
 		||	<expr>
-			(	||	<OR>
+			[	||	<OR>
 				||	<NOR>
 				||	<DOUBLEBAR>
-			)
+			]
 			<expr>
 		||	<expr>
 			<LRDOUBLEARROW>
 			<expr>
 		||	<expr>
-			(	||	<RDOUBLEARROW>
+			[	||	<RDOUBLEARROW>
 				||	<LCONTAINS>
-			)
+			]
 			<expr>
 		||	<expr>
-			(	||	<RIGHTTEE>
+			[	||	<RIGHTTEE>
 				||	<DOUBLERIGHTTEE>
-			)
+			]
 			<expr>
 		||	<expr>
-			(	||	<LEFTTEE>
+			[	||	<LEFTTEE>
 				||	<DOUBLELEFTTEE>
 				||	<UPTEE>
 				||	<DOWNTEE>
-			)
+			]
 			<expr>
 		||	<expr>
 			<SUCHTHAT>
 			<expr>
 		||	<expr>
-			(	||	<DOUBLEDOT>
+			[	||	<DOUBLEDOT>
 				||	<TRIPPLEDOT>
-			)
+			]
 		||	<expr>
 			<BAR>
 			<expr>
@@ -303,23 +303,23 @@ role Mathematica::Grammar::InputForm
 			<SLASHSEMI>
 			<expr>
 		||	<expr>
-			(	||	<MINUSGREATER>
+			[	||	<MINUSGREATER>
 				||	<RARROW>
 				||	<COLONGREATER>
 				||	<COLONARROW>
-			)
+			]
 			<expr>
 		||	<expr>
-			(	||	<SLASHDOT>
+			[	||	<SLASHDOT>
 				||	<DOUBLESLASHDOT>
-			)
+			]
 			<expr>
 		||	<expr>
-			(	||	<PLUSEQUAL>
+			[	||	<PLUSEQUAL>
 				||	<MINUSEQUAL>
 				||	<ASTERISKEQUAL>
 				||	<SLASHEQUAL>
-			)
+			]
 			<expr>
 		||	<expr>
 			<AMP>
@@ -342,19 +342,19 @@ role Mathematica::Grammar::InputForm
 			<EQUAL>
 			<DOT>
 		||	<expr>
-			(	||	<EQUAL>
+			[	||	<EQUAL>
 				||	<COLONEQUAL>
 				||	<CARETEQUAL>
 				||	<CARETCOLONEQUAL>
 				||	<FUNCTIONARROW>
-			)
+			]
 			<expr>
 		||	<symbol>
 			<SLASHCOLON>
 			<expr>
-			(	||	<EQUAL>
+			[	||	<EQUAL>
 				||	<COLONEQUAL>
-			)
+			]
 			<expr>
 		||	<symbol>
 			<SLASHCOLON>
@@ -362,9 +362,9 @@ role Mathematica::Grammar::InputForm
 			<EQUAL>
 			<DOT>
 		||	<expr>
-			(	||	<DOUBLEGREATER>
+			[	||	<DOUBLEGREATER>
 				||	<TRIPPLEGREATER>
-			)
+			]
 			<StringLiteral>
 		||	<expr>
 			<SEMICOLON>
@@ -388,29 +388,29 @@ role Mathematica::Grammar::InputForm
 			<NumberInBase>
 			<numberLiteralPrecision>?
 			<numberLiteralExponent>?
-		||	(	||	<DIGITS>
+		||	[	||	<DIGITS>
 				||	<DecimalNumber>
-			)
+			]
 			<numberLiteralPrecision>?
 			<numberLiteralExponent>?
 	}
 	token numberLiteralPrecision {
 		||	<DOUBLEBACKQUOTE>
-			(	||	<DecimalNumber>
+			[	||	<DecimalNumber>
 				||	<DIGITS>
-			)
+			]
 		||	<BACKQUOTE>
-			(	||	<DecimalNumber>
+			[	||	<DecimalNumber>
 				||	<DIGITS>
-			)?
+			]?
 	}
 	token numberLiteralExponent {
-		||	(	||	<ASTERISKCARET>
-					(	||	<PLUS>
+		||	[	||	<ASTERISKCARET>
+					[	||	<PLUS>
 						||	<MINUS>
-					)?
+					]?
 					<DIGITS>
-			)
+			]
 	}
 	token outExpression {
 		||	<PERCENTDIGITS>
@@ -425,9 +425,9 @@ role Mathematica::Grammar::InputForm
 	}
 	token expressionList {
 		||	<expr>?
-			(	||	<COMMA>
+			[	||	<COMMA>
 					<expr>?
-			)*
+			]*
 	}
 	token accessExpression {
 		||	<LBRACKET>
