@@ -1,7 +1,9 @@
 # Raku Mathematica::Grammar
 
-This package provide grammar and action classes for parsing and interpretation 
+This package provides grammar and action classes for parsing and interpretation 
 of Mathematica (aka Wolfram Language) expressions.
+
+------
 
 ## Grammar derivation
 
@@ -29,11 +31,44 @@ options{
 }
 ```
 
-3. 'Fix' the left recursion of `<expr>` in 
+3. Minor grammar tweaks:
+   
+   - Convert some tokens into regexes
+     
+   - Convert `( ... )` groups into `[ ... ]`  
+   
+   - Translate applications of ANTLR4 sequence idiom into Raku's standard idiom, e.g. `<expr> % <COMMA>`
+    
+4. 'Fix' the left recursion of `<expr>` in 
   ["FullForm.rakumod"](./lib/Mathematica/Grammar/FullForm.rakumod).
   
 For more details of the origins of the "foxy sheep" projects see Robert Jacobson's project
 [FoxySheep](https://github.com/rljacobson/FoxySheep), [RJ1].
+
+------
+
+## TODO
+
+Highest priority items are put on top:
+
+1. [ ] Make the `InputForm` work.
+
+2. [ ] `FullForm` tests:
+   
+   - [ ] Algebraic expressions
+   - [ ] `Dataset` expressions
+   - [ ] `VerificationTest`
+   - [ ] Function definitions
+    
+3. [ ] `InputForm` tests:
+
+    - [ ] Algebraic expressions
+    - [ ] `Dataset` expressions
+    - [ ] `VerificationTest`
+    - [ ] Function definitions
+   
+
+------
 
 ## References
 
@@ -47,7 +82,7 @@ For more details of the origins of the "foxy sheep" projects see Robert Jacobson
 (2015),
 [GitHub/rocky](https://github.com/rocky).
 
-[RJ1] Robert Jackobson,
+[RJ1] Robert Jacobson,
 [FoxySheep Python package](https://github.com/rljacobson/FoxySheep),
 (2015),
 [GitHub/rljacobson](https://github.com/rljacobson).
