@@ -1,0 +1,31 @@
+{
+  "name": "Mathematica::Grammar",
+  "description": "Grammar for parsing Mathematica (aka Wolfram Language) expressions.",
+  "version": "0.1.0",
+  "perl": "6.d",
+  "authors": [
+    "Anton Antonov"
+  ],
+  "auth": "github:antononcube",
+  "depends": [],
+  "build-depends": [],
+  "test-depends": [],
+  "provides": {
+    "Mathematica::Grammar::FullForm": "lib/Mathematica/Grammar/FullForm.rakumod",
+    "Mathematica::Grammar::FullFormLexerRules": "lib/Mathematica/Grammar/FullFormLexerRules.rakumod",
+    "Mathematica::Grammar::InputForm": "lib/Mathematica/Grammar/InputForm.rakumod",
+    "Mathematica::Grammar::InputFormLexerRules": "lib/Mathematica/Grammar/InputFormLexerRules.rakumod"
+  },
+  "resources": [],
+  "license": "Artistic-2.0",
+  "tags": [
+    "grammar",
+    "mathematica",
+    "parser",
+    "wl",
+    "wolfram language",
+    "wolfram"
+  ],
+  "api": "1",
+  "source-url": "https://github.com/antononcube/Raku-Mathematica-Grammar.git"
+}
