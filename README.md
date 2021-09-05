@@ -12,6 +12,9 @@ In order to derive the grammars I did the following steps:
 1. Take [ANTLR4 grammars](https://github.com/rocky/FoxySheep2/tree/master/grammar)
 from Rocky Bernstein's Python package
 [FoxySheep2](https://github.com/rocky/FoxySheep2), [RB1].
+   
+   - For more details of the origins of the "foxy sheep" projects see Robert Jacobson's project
+     [FoxySheep](https://github.com/rljacobson/FoxySheep), [RJ1].
 
 2. Translate the g4 grammars from ANTLR4's BNF-like format to Raku using Jeff Goff's Raku package
 [ANTLR4::Grammar](https://github.com/drforr/perl6-ANTLR4), [JG1].
@@ -41,9 +44,47 @@ options{
     
 4. 'Fix' the left recursion of `<expr>` in 
   ["FullForm.rakumod"](./lib/Mathematica/Grammar/FullForm.rakumod).
-  
-For more details of the origins of the "foxy sheep" projects see Robert Jacobson's project
-[FoxySheep](https://github.com/rljacobson/FoxySheep), [RJ1].
+   Compare the original ANTLR4-derived rule and its replacement:
+
+```perl6
+# Original
+token expr {
+    ||	<numberLiteral>
+    ||	<StringLiteral>
+    ||	<symbol>
+    ||	<expr>
+        <LBRACKET>
+        <expressionList>
+        <RBRACKET> }
+```   
+
+```perl6
+# Replacement
+token expr-head {
+    ||	<numberLiteral>
+    ||	<StringLiteral>
+    ||	<symbol>
+}
+
+regex expr {
+    || <expr-head> \h* [ <LBRACKET> \h* <expressionList> \h* <RBRACKET> ]+
+    || <expr-head>
+}
+```   
+
+------
+
+## Usage examples
+
+***Currently only Mathematica 
+[`FullForm`](https://reference.wolfram.com/language/ref/FullForm.html) 
+expressions parsing is implemented.***
+
+```perl6
+use Mathematica::Grammar;
+
+say Mathematica::Grammar.parse( 'Plus[List[a,b],List[2,3]]');
+```
 
 ------
 
@@ -53,20 +94,30 @@ Highest priority items are put on top:
 
 1. [ ] Make the `InputForm` work.
 
-2. [ ] `FullForm` tests:
+2. [ ] Provide execution Raku actions.
    
-   - [ ] Algebraic expressions
-   - [ ] `Dataset` expressions
+3. [ ] Parsing `FullForm` expressions tests:
+   
+   - [X] Algebraic
+   - [ ] `List`
+   - [ ] `Association`
+   - [ ] `Dataset`
    - [ ] `VerificationTest`
    - [ ] Function definitions
     
-3. [ ] `InputForm` tests:
+3. [ ] Parsing `InputForm` expressions tests:
 
-    - [ ] Algebraic expressions
-    - [ ] `Dataset` expressions
+    - [ ] Algebraic
+    - [ ] `List`
+    - [ ] `Association`
+    - [ ] `Dataset`
     - [ ] `VerificationTest`
     - [ ] Function definitions
    
+4. Provide execution actions for natural languages explanations
+ 
+   - [ ] English
+   - [ ] Bulgarian
 
 ------
 
