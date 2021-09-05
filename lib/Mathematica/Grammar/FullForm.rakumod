@@ -12,6 +12,7 @@ role Mathematica::Grammar::FullForm
 					<expr>?
 			]*
 	}
+
 	# Original version
 	#`(
 	token expr {
@@ -23,22 +24,27 @@ role Mathematica::Grammar::FullForm
 			<expressionList>
 			<RBRACKET>
 	} )
+
 	token expr-head {
 		||	<numberLiteral>
 		||	<StringLiteral>
 		||	<symbol>
 	}
+
 	regex expr {
 		|| <expr-head> \h* [ <LBRACKET> \h* <expressionList> \h* <RBRACKET> ]+
 		|| <expr-head>
 	}
+
 	regex expressionList {
-		||	<expr>+ % [ \h* <COMMA> \h* ]
+		||	<expr>* % [ \h* <COMMA> \h* ]
 	}
+
 	token symbol {
 		||	<context>?
 			<Name>
 	}
+
 	token context {
 		||	<BACKQUOTE>?
 			<Name>
@@ -48,6 +54,7 @@ role Mathematica::Grammar::FullForm
 			<Name>
 			<BACKQUOTE>
 	}
+
 	token numberLiteral {
 		||	<MINUS>?
 			<DIGITS>
@@ -61,6 +68,7 @@ role Mathematica::Grammar::FullForm
 			<numberLiteralPrecision>?
 			<numberLiteralExponent>?
 	}
+
 	token numberLiteralPrecision {
 		||	<DOUBLEBACKQUOTE>
 			[	||	<DecimalNumber>
@@ -71,6 +79,7 @@ role Mathematica::Grammar::FullForm
 				||	<DIGITS>
 			]?
 	}
+
 	token numberLiteralExponent {
 		||	[	||	<ASTERISKCARET>
 					[	||	<PLUS>
