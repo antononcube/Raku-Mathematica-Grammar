@@ -29,7 +29,8 @@ role Mathematica::Grammar::FullForm
 		||	<symbol>
 	}
 	regex expr {
-		<expr-head> \h* [ <LBRACKET> \h* <expressionList> \h* <RBRACKET> ]+ || <expr-head>
+		|| <expr-head> \h* [ <LBRACKET> \h* <expressionList> \h* <RBRACKET> ]+
+		|| <expr-head>
 	}
 	regex expressionList {
 		||	<expr>+ % [ \h* <COMMA> \h* ]
@@ -54,9 +55,9 @@ role Mathematica::Grammar::FullForm
 			<numberLiteralPrecision>?
 			<numberLiteralExponent>?
 		||	<MINUS>?
-			(	||	<DIGITS>
+			[	||	<DIGITS>
 				||	<DecimalNumber>
-			)
+			]
 			<numberLiteralPrecision>?
 			<numberLiteralExponent>?
 	}
