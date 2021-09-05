@@ -27,7 +27,7 @@ ok Mathematica::Grammar.parse( 'Plus[List[a,b],List[2,3]]');
 ok parse-func('45'), '45';
 
 ## 3
-ok parse-func('Abc'), '45';
+ok parse-func('Abc89'), 'Abc89';
 
 ## 4
 ok parse-func('Plus[ ]'), 'Plus[ ]';
