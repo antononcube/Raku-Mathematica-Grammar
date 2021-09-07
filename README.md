@@ -5,6 +5,23 @@ of Mathematica (aka Wolfram Language) expressions.
 
 ------
 
+## Usage examples
+
+***Currently only Mathematica
+[`FullForm`](https://reference.wolfram.com/language/ref/FullForm.html)
+expressions parsing is implemented.***
+
+```perl6
+use Mathematica::Grammar;
+
+say Mathematica::Grammar.parse( 'Plus[List[a,b],List[2,3]]');
+```
+See the file
+["Basic-WL-expressions-parsing.raku"](./examples/Basic-WL-expressions-parsing.raku)
+or the [unit tests](./t) for more examples.
+
+------
+
 ## Grammar derivation
 
 In order to derive the grammars I did the following steps:
@@ -70,21 +87,10 @@ regex expr {
     || <expr-head> \h* [ <LBRACKET> \h* <expressionList> \h* <RBRACKET> ]+
     || <expr-head>
 }
-```   
+``` 
 
-------
-
-## Usage examples
-
-***Currently only Mathematica 
-[`FullForm`](https://reference.wolfram.com/language/ref/FullForm.html) 
-expressions parsing is implemented.***
-
-```perl6
-use Mathematica::Grammar;
-
-say Mathematica::Grammar.parse( 'Plus[List[a,b],List[2,3]]');
-```
+For the actual ANTLR4-to-Raku conversion code see the file
+["Convert-FoxySheep2-ANTLR4-grammars.raku"](./examples/Convert-FoxySheep2-ANTLR4-grammars.raku).
 
 ------
 
@@ -92,29 +98,37 @@ say Mathematica::Grammar.parse( 'Plus[List[a,b],List[2,3]]');
 
 Highest priority items are put on top:
 
-1. [ ] Make the `InputForm` work.
-
-2. [ ] Provide execution Raku actions.
+1. [ ] Provide execution Raku actions.
    
-3. [ ] Parsing `FullForm` expressions tests:
+2. [ ] Parsing `FullForm` expressions tests:
    
    - [X] Algebraic
+   - [ ] Arithmetic
+      - [ ] Standard
+      - [ ] BigNum
+      - [ ] Rationals
    - [ ] `List`
    - [ ] `Association`
    - [ ] `Dataset`
    - [ ] `VerificationTest`
    - [ ] Function definitions
     
-3. [ ] Parsing `InputForm` expressions tests:
+3. [ ] Make the `InputForm` work.
 
-    - [ ] Algebraic
-    - [ ] `List`
-    - [ ] `Association`
-    - [ ] `Dataset`
-    - [ ] `VerificationTest`
-    - [ ] Function definitions
+4. [ ] Parsing `InputForm` expressions tests:
+    
+   - [X] Algebraic
+   - [ ] Arithmetic
+      - [ ] Standard
+      - [ ] BigNum
+      - [ ] Rationals
+   - [ ] `List`
+   - [ ] `Association`
+   - [ ] `Dataset`
+   - [ ] `VerificationTest`
+   - [ ] Function definitions
    
-4. Provide execution actions for natural languages explanations
+5. Provide execution actions for natural languages explanations
  
    - [ ] English
    - [ ] Bulgarian
