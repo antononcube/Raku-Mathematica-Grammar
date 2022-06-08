@@ -6,6 +6,10 @@ use Mathematica::Actions::Raku::FullFormLexerRules;
 class Mathematica::Actions::Raku::FullForm
         is Mathematica::Actions::Raku::FullFormLexerRules {
 
+    ##=======================================================
+    ## General rules / methods
+    ##=======================================================
+
     method TOP($/) {
         make $/.values[0].made;
     }
@@ -25,16 +29,23 @@ class Mathematica::Actions::Raku::FullForm
     }
 
     method expressionList($/) {
-        make $<expr>>>.made.join(',')
+        make $<expr>>>.made.join(',');
     }
 
-    method context($/) { make $/.Str.subst(:g, '`', '::') }
+    method context($/) {
+        make $/.Str.subst(:g, '`', '::');
+    }
 
     method symbol($/) {
-        make ( $<context> ?? $<context>.made !! '') ~ $<Name>.made }
+        make ( $<context> ?? $<context>.made !! '') ~ $<Name>.made;
+    }
 
-    method numberLiteral($/) { make $/.Str }
+    method numberLiteral($/) { make $/.Str; }
 
-    method numberLiteralPrecision($/) { $/.Str.Numeric }
+    method numberLiteralPrecision($/) { make $/.Str.Numeric; }
+
+    ##=======================================================
+    ## Special rules / methods
+    ##=======================================================
 
 }
