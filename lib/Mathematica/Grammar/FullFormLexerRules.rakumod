@@ -137,10 +137,10 @@ role Mathematica::Grammar::FullFormLexerRules {
 		||	'ScriptDotlessJ'
 	}
 	token DecimalNumber {
-		||	<DIGITS>
+		|	<DIGITS>
 			<DOT>
 			<DIGIT>*
-		||	<DIGIT>*
+		|	<DIGIT>*
 			<DOT>
 			<DIGITS>
 	}

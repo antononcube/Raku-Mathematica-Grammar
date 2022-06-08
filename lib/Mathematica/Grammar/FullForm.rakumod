@@ -62,8 +62,8 @@ role Mathematica::Grammar::FullForm
 			<numberLiteralPrecision>?
 			<numberLiteralExponent>?
 		||	<MINUS>?
-			[	||	<DIGITS>
-				||	<DecimalNumber>
+			[	|	<DIGITS>
+				|	<DecimalNumber>
 			]
 			<numberLiteralPrecision>?
 			<numberLiteralExponent>?
@@ -71,8 +71,8 @@ role Mathematica::Grammar::FullForm
 
 	token numberLiteralPrecision {
 		||	<DOUBLEBACKQUOTE>
-			[	||	<DecimalNumber>
-				||	<DIGITS>
+			[	|	<DecimalNumber>
+				|	<DIGITS>
 			]
 		||	<BACKQUOTE>
 			[	||	<DecimalNumber>
