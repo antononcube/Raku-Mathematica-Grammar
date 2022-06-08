@@ -13,6 +13,7 @@
   "build-depends": [],
   "test-depends": [],
   "provides": {
+    "Mathematica::Actions::English::FullForm": "lib/Mathematica/Actions/English/FullForm.rakumod",
     "Mathematica::Actions::Raku::FullForm": "lib/Mathematica/Actions/Raku/FullForm.rakumod",
     "Mathematica::Actions::Raku::FullFormLexerRules": "lib/Mathematica/Actions/Raku/FullFormLexerRules.rakumod",
     "Mathematica::Grammar": "lib/Mathematica/Grammar.rakumod",
