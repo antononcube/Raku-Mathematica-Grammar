@@ -36,7 +36,12 @@ class Mathematica::Actions::English::FullForm
     }
 
     method expressionList($/) {
-        make $<expr>>>.made.join(', ');
+        if $<expr>.elems == 1 {
+            make $<expr>>>.made.join(', ');
+        } else {
+            my @res = $<expr>>>.made;
+            make @res[0..*-2].join(', ') ~ ', and ' ~ @res.tail;
+        }
     }
 
     method context($/) {
