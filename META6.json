@@ -15,6 +15,7 @@
   "provides": {
     "Mathematica::Actions::Raku::FullForm": "lib/Mathematica/Actions/Raku/FullForm.rakumod",
     "Mathematica::Actions::Raku::FullFormLexerRules": "lib/Mathematica/Actions/Raku/FullFormLexerRules.rakumod",
+    "Mathematica::Grammar": "lib/Mathematica/Grammar.rakumod",
     "Mathematica::Grammar::FullForm": "lib/Mathematica/Grammar/FullForm.rakumod",
     "Mathematica::Grammar::FullFormLexerRules": "lib/Mathematica/Grammar/FullFormLexerRules.rakumod",
     "Mathematica::Grammar::InputForm": "lib/Mathematica/Grammar/InputForm.rakumod",
