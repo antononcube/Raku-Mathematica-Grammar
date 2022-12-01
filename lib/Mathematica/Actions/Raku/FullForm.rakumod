@@ -40,9 +40,29 @@ class Mathematica::Actions::Raku::FullForm
         make ( $<context> ?? $<context>.made !! '') ~ $<Name>.made;
     }
 
-    method numberLiteral($/) { make $/.Str; }
+    method numberLiteral($/) {
+        my $res;
+        if $<DecimalNumber> {
+            $res = $<DecimalNumber>.Str;
+            if $res ~~ / .* '.' $ / {
+                $res ~= '0';
+            }
+        }
+        with $<numberLiteralPrecision> {
+            if $<numberLiteralPrecision>.made {
+                note "Arbitrary precision conversion is not implemented yet. Continue with Num. (Specified precision is {$<numberLiteralPrecision>.made}.)";
+            }
+        }
+        make $res;
+    }
 
-    method numberLiteralPrecision($/) { make $/.Str.Numeric; }
+    method numberLiteralPrecision($/) {
+        if $<DecimalNumber> {
+            make $<DecimalNumber>.made;
+        } else {
+            make '';
+        }
+    }
 
     ##=======================================================
     ## Special rules / methods
