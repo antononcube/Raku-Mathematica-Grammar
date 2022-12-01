@@ -1,4 +1,3 @@
-
 use v6;
 
 use Mathematica::Actions::Raku::FullFormLexerRules;
@@ -18,11 +17,30 @@ class Mathematica::Actions::Raku::FullForm
         make $/.values>>.made.join("\n");
     }
 
-    method expr-head($/) { make $/.values[0].made; }
+    method expr-head($/) {
+        make $/.values[0].made;
+    }
 
     method expr($/) {
         if $<expressionList> {
-            make $<expr-head>.made ~ $<expressionList>>>.made.map({ '(' ~ $_ ~ ')' }).join();
+            my $head = $<expr-head>.made;
+            given $head {
+                when 'Association' {
+                    $head = 'Hash';
+                    make $head ~ $<expressionList>>>.made.map({ '(' ~ $_ ~ ')' }).join();
+                }
+                when 'Rule' {
+                    $head = 'Pair.new';
+                    make $head ~ $<expressionList>>>.made.map({ '(' ~ $_ ~ ')' }).join();
+                }
+                when 'Plus' {
+                    $head = '&[+]';
+                    make 'reduce(' ~ $head ~ ', ' ~ $<expressionList>>>.made.map({ '(' ~ $_ ~ ')' }).join() ~ ')';
+                }
+                default {
+                    make $head ~ $<expressionList>>>.made.map({ '(' ~ $_ ~ ')' }).join();
+                }
+            }
         } else {
             make $<expr-head>.made;
         }
@@ -37,7 +55,7 @@ class Mathematica::Actions::Raku::FullForm
     }
 
     method symbol($/) {
-        make ( $<context> ?? $<context>.made !! '') ~ $<Name>.made;
+        make ($<context> ?? $<context>.made !! '') ~ $<Name>.made;
     }
 
     method numberLiteral($/) {
@@ -47,10 +65,12 @@ class Mathematica::Actions::Raku::FullForm
             if $res ~~ / .* '.' $ / {
                 $res ~= '0';
             }
+        } elsif $<DIGITS> {
+            $res = $<DIGITS>.Str;
         }
         with $<numberLiteralPrecision> {
             if $<numberLiteralPrecision>.made {
-                note "Arbitrary precision conversion is not implemented yet. Continue with Num. (Specified precision is {$<numberLiteralPrecision>.made}.)";
+                note "Arbitrary precision conversion is not implemented yet. Continue with Num. (Specified precision is { $<numberLiteralPrecision>.made }.)";
             }
         }
         make $res;
