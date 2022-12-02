@@ -33,9 +33,9 @@ class Mathematica::Actions::Raku::FullForm
                     $head = 'Pair.new';
                     make $head ~ $<expressionList>>>.made.map({ '(' ~ $_ ~ ')' }).join();
                 }
-                when 'Plus' {
-                    $head = '&[+]';
-                    make 'reduce(' ~ $head ~ ', ' ~ $<expressionList>>>.made.map({ '(' ~ $_ ~ ')' }).join() ~ ')';
+                when $_ ∈ <Plus Times> {
+                    my %h2h = Plus => '&[+]', Times => '&[*]';
+                    make 'reduce(' ~ %h2h{$_}  ~ ', ' ~ $<expressionList>>>.made.map({ '(' ~ $_ ~ ')' }).join() ~ ')';
                 }
                 default {
                     make $head ~ $<expressionList>>>.made.map({ '(' ~ $_ ~ ')' }).join();
