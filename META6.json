@@ -22,7 +22,11 @@
     "Mathematica::Grammar::InputForm": "lib/Mathematica/Grammar/InputForm.rakumod",
     "Mathematica::Grammar::InputFormLexerRules": "lib/Mathematica/Grammar/InputFormLexerRules.rakumod"
   },
-  "resources": [],
+  "resources": [
+    "wl-symbols-to-unicode.raku",
+    "WLToUnicode.raku",
+    "UnicodeLongNames.csv"
+  ],
   "license": "Artistic-2.0",
   "tags": [
     "grammar",
